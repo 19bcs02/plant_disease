@@ -1,0 +1,9 @@
+0 Apple Scab
+1 Apple black rot
+2 Apple Healthy
+3 Corn Gray leaf spot (GLS)
+4 Corn Common rust
+5 Corn healhy
+6 Grape Black rot
+7 Grape Black Measles
+8 Grape healthy

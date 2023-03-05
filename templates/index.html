@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plant Disease Detector</title>
+    <style>
+      /* Add some style to the button */
+      button {
+        background-color: orange;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      /* Center the form */
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      /* Center the output */
+      .output {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Plant Disease Detector</h1>
+    <form method="POST" action="/predict" enctype="multipart/form-data">
+      <!-- Add an image preview -->
+      <img id="img-preview" src="#" alt="Image preview" style="display: none">
+      <input type="file" name="image" id="img-input">
+<!--      <label for="img-input">-->
+<!--        <button type="button">Select Image</button>-->
+<!--      </label>-->
+      <button type="submit">Submit</button>
+    </form>
+    {% if output %}
+    <div class="output">
+      <h2>Output:</h2>
+      <p>Status: {{ output.status }}</p>
+      <p>Plant Name: {{ output.plant_name }}</p>
+      {% if output.disease %}
+      <p>Disease: {{ output.disease }}</p>
+      {% endif %}
+      <p>Solution: {{ output.solution }}</p>
+      <p>Confidence Score: {{ output.confidence_score }}</p>
+      {% if output.status == 'Unhealthy' %}
+      <form method="POST" action="/send_email">
+        <label for="email-input">Enter your email address to receive more details:</label>
+        <input type="email" name="email" id="email-input" required>
+<!--        <input type="hidden" name="disease" value="{{ output.disease }}">-->
+        <input type="submit" value="Send">
+      </form>
+      {% endif %}
+    </div>
+    {% endif %}
+    <script>
+      // Preview the image before submitting the form
+      const imgInput = document.getElementById("img-input");
+      const imgPreview = document.getElementById("img-preview");
+      imgInput.addEventListener("change", () => {
+        const file = imgInput.files[0];
+        if (file) {
+          imgPreview.style.display = "block";
+          imgPreview.src = URL.createObjectURL(file);
+        } else {
+          imgPreview.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--  <head>-->
+<!--    <title>Plant Disease Detector</title>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <h1>Plant Disease Detector</h1>-->
+<!--    <form method="POST" action="/predict" enctype="multipart/form-data">-->
+<!--      <input type="file" name="image">-->
+<!--      <input type="submit" value="Submit">-->
+<!--    </form>-->
+<!--    {% if output %}-->
+<!--    <h2>Output:</h2>-->
+<!--    <p>Status: {{ output.status }}</p>-->
+<!--    <p>Plant Name: {{ output.plant_name }}</p>-->
+<!--    {% if output.disease %}-->
+<!--    <p>Disease: {{ output.disease }}</p>-->
+<!--    {% endif %}-->
+<!--    <p>Solution: {{ output.solution }}</p>-->
+<!--    <p>Confidence Score: {{ output.confidence_score }}</p>-->
+<!--    {% endif %}-->
+<!--  </body>-->

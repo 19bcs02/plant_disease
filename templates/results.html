@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Disease Detection Results</title>
+</head>
+<body>
+    <h1>Plant Disease Detection Results</h1>
+
+    {% if is_healthy %}
+        <p>The plant is healthy.</p>
+    {% else %}
+        <p>The plant is unhealthy.</p>
+        <p>Founded Disease: {{ disease_name }}</p>
+    {% endif %}
+
+    <p>Plant Name: {{ plant_name }}</p>
+    <p>Disease Status: {{ status }}</p>
+    <p>Solution: {{ solution }}</p>
+    <p>Confidence Score: {{ confidence_score }}</p>
+
+    <img src="{{ image_url }}" alt="Uploaded Image">
+
+</body>
+</html>
